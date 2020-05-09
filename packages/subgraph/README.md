@@ -151,12 +151,13 @@ sudo rm -rf data && docker-compose up
 
 ```
 
-2. Deploy the contracts to ganache (if needed)
+2. Deploy the contracts to Ganache (if needed)
 
-3. Re-deploy the new subgraph, whenever subgraph.yaml is changed:
+3. Create and deploy the subgraph.
 
 ```bash
-yarn deploy-local --watch
+yarn create-local
+yarn deploy-local
 ```
 
 ## Bring-your-own rToken
