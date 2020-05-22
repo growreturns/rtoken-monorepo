@@ -1,4 +1,4 @@
-NETWORK=kovan
+NETWORK=mainnet
 
 build:
 	npx truffle build
