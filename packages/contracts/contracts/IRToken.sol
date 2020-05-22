@@ -294,6 +294,12 @@ contract IRToken is RTokenStructs, IERC20 {
         view
         returns (HatStatsView memory);
 
+    /**
+     * @notice Supply and Borrow percentage yield
+     * @return percentage yield in uint256
+     */
+    function supplyAndBorrowApy() external view returns (uint256, uint256);
+
     ////////////////////////////////////////////////////////////////////////////
     // Events
     ////////////////////////////////////////////////////////////////////////////

@@ -15,6 +15,12 @@ interface IAllocationStrategy {
     function underlying() external view returns (address);
 
     /**
+     * @notice Supply and Borrow percentage yield
+     * @return percentage yield in uint256
+     */
+    function supplyAndBorrowApy() external view returns (uint256, uint256);
+
+    /**
      * @notice Calculates the exchange rate from underlying to saving assets
      * @return uint256 Calculated exchange rate scaled by 1e18
      *

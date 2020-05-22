@@ -1012,4 +1012,13 @@ contract RToken is
             account.rInterest = rGross - account.lDebt;
         }
     }
+
+    /**
+     * @notice Supply and Borrow percentage yield per block
+     * @return percentage yield in uint256
+     */
+    function supplyAndBorrowApy() external view returns (uint256, uint256) {
+        (uint256 supplyRatePerBlock, uint256 borrowRatePerBlock) = ias.supplyAndBorrowApy();
+        return (supplyRatePerBlock, borrowRatePerBlock);
+    }
 }

@@ -30,6 +30,13 @@ contract CompoundAllocationStrategy is IAllocationStrategy, Ownable {
         return cToken.accrueInterest() == 0;
     }
 
+    /// @dev ISavingStrategy.supplyAndBorrowApy implementation
+    function supplyAndBorrowApy() external view returns (uint256, uint256) {
+        uint256 supplyRatePerBlock = cToken.supplyRatePerBlock();
+        uint256 borrowRatePerBlock = cToken.borrowRatePerBlock();
+        return (supplyRatePerBlock, borrowRatePerBlock);
+    }
+
     /// @dev ISavingStrategy.investUnderlying implementation
     function investUnderlying(uint256 investAmount) external onlyOwner returns (uint256) {
         token.transferFrom(msg.sender, address(this), investAmount);
