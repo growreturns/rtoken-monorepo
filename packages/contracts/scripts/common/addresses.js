@@ -9,15 +9,17 @@ module.exports = {
     main: {
         cDAI: "0xE5C6c14F466A4F3A73eCEc7F3aAaA15c5EcBc769",
         rDAI: {
-            address: "0xD34e22D440ce2Bf6697BCEe8F58046fBB7851801",
-            creationBlockNumber: 10108514,
+            address: "0xEDE059573FD41d9b39fAdC0E9a6f83E228BA1B4E",
+            creationBlockNumber: 10145799,
         },
         cUSDT: "0x5eddA8366d9221fc8aF079248f03c82763f0C193",
         rUSDT: {
             address: "0x6f1093e10991367B1049FA02F7E8234fBE303850",
             creationBlockNumber: 10099810,
-        }
-    }
+        },
+        // Old
+        // rDAI: "0xD34e22D440ce2Bf6697BCEe8F58046fBB7851801",
+    },
 };
 
 /// Initial values

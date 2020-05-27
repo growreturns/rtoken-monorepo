@@ -89,7 +89,7 @@ module.exports = {
                 true // shareNonce
             ),
             network_id: 1, // mainnet's id
-            //gas: 7017622, //
+            gas: 8000000, // max gaslimit
             gasPrice: +process.env.MAINNET_GAS_PRICE || 1000*1000*1000, // default 1 gwei
             //confirmations: 2, // # of confs to wait between deployments. (default: 0)
             timeoutBlocks: 50, // # of blocks before a deployment times out  (minimum/default: 50)

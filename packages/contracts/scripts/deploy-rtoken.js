@@ -48,7 +48,7 @@ module.exports = async function (callback) {
         console.log(`transfer ownership of compoundAS to new rToken(${newRtokenSymbol} proxy)`, proxy.address);
         await web3tx(compoundAS.transferOwnership, "compoundAS.transferOwnership")(proxy.address);
 
-        console.log("\n\n\n");
+        console.log("\n\n");
         console.log(`${newRtokenSymbol} proxy deployed at: ${proxy.address} at Block Number: ${proxy.receipt.blockNumber}\n`);
         callback();
     } catch (err) {
