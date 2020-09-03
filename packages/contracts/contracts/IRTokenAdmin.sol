@@ -48,6 +48,11 @@ interface IRTokenAdmin {
     function updateCode(address newCode) external;
 
     /**
+     * @notice Update the SDG staking contract
+     */
+    function setStakingPool(address newPool) external;
+
+    /**
      * @notice Code updated event
      */
     event CodeUpdated(address newCode);

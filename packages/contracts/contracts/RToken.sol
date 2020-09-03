@@ -16,6 +16,7 @@ import {RTokenStorage} from "./RTokenStorage.sol";
 import {IERC20, IRToken} from "./IRToken.sol";
 import {IRTokenAdmin} from "./IRTokenAdmin.sol";
 import {IAllocationStrategy} from "./IAllocationStrategy.sol";
+import {ISdgStaking} from "./ISdgStaking.sol";
 
 /**
  * @notice RToken an ERC20 token that is 1:1 redeemable to its underlying ERC20 token.
@@ -177,6 +178,18 @@ contract RToken is
     //
     // rToken interface
     //
+
+    function stakeInternal(address user, uint amount) internal {
+        if(address(sdgStakingPool) != address(0)) {
+            sdgStakingPool.stake(user, amount);
+        }
+    }
+
+    function unstakeInternal(address user, uint amount) internal {
+        if(address(sdgStakingPool) != address(0)) {
+            sdgStakingPool.withdraw(user, amount);
+        }
+    }
 
     /// @dev IRToken.mint implementation
     function mint(uint256 mintAmount) external nonReentrant returns (bool) {
@@ -481,6 +494,14 @@ contract RToken is
         emit AllocationStrategyChanged(allocationStrategy_, savingAssetConversionRate);
     }
 
+    /// @dev IRToken.setStakingPool implementation
+    function setStakingPool(address newPool) 
+        external
+        nonReentrant
+        onlyOwner {
+        sdgStakingPool = ISdgStaking(newPool);
+    }
+
     /// @dev IRToken.changeHatFor implementation
     function getCurrentAllocationStrategy()
         external view returns (address allocationStrategy) {
@@ -558,6 +579,10 @@ contract RToken is
             changeHatInternal(dst, accounts[src].hatID);
         }
 
+        // move stake between accounts
+        unstakeInternal(src, tokens);
+        stakeInternal(dst, tokens);
+
         /* We emit a Transfer event */
         emit Transfer(src, dst, tokens);
     }
@@ -591,6 +616,9 @@ contract RToken is
         uint256 sInternalCreated = sOriginalToSInternal(sOriginalCreated);
         distributeLoans(msg.sender, mintAmount, sInternalCreated);
 
+        // stake for SDG
+        stakeInternal(msg.sender, mintAmount);
+
         emit Transfer(address(0), msg.sender, mintAmount);
     }
 
@@ -616,6 +644,9 @@ contract RToken is
 
         // transfer the token back
         require(token.transfer(redeemTo, redeemAmount), "token transfer failed");
+
+        // unstake SDG
+        unstakeInternal(msg.sender, redeemAmount);
 
         emit Transfer(msg.sender, address(0), redeemAmount);
     }
