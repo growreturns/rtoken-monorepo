@@ -10,7 +10,7 @@ module.exports = async function (callback) {
         global.web3 = web3;
         const network = await web3.eth.net.getNetworkType();
 
-        const CompoundAllocationStrategy = artifacts.require("CompoundAllocationStrategy");
+        const CompoundAllocationStrategy = artifacts.require("CompoundAllocationStrategyV2");
         const RDAI = artifacts.require("rDAI");
         const Proxy = artifacts.require("Proxy");
 
@@ -19,10 +19,13 @@ module.exports = async function (callback) {
         let compoundASAddress = await promisify(rl.question)("Specify a deployed CompoundAllocationStrategy (deploy a new one if blank): ");
         let compoundAS;
         if (!compoundASAddress) {
+            const compReceiver = await promisify(rl.question)("Specify a compReceiver address (cannot be blank): ");
+            if(!compReceiver) throw new Error('No Comp Receiver specified');
             compoundAS = await web3tx(
                 CompoundAllocationStrategy.new,
                 `CompoundAllocationStrategy.new cDAI ${addresses.cDAI}`)(
-                addresses.cDAI
+                addresses.cDAI,
+                compReceiver
             );
             console.log("compoundAllocationStrategy deployed at: ", compoundAS.address);
         } else {
