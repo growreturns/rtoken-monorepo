@@ -2,7 +2,7 @@
  * In order to build a Aragon App, it is required to have a solidity requirement
  * that is without ABIEncoderV2.
  */
-pragma solidity >= 0.4.24;
+pragma solidity 0.5.12;
 
 /**
  * IRTokenAdmin interface

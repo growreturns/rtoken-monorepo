@@ -3,7 +3,7 @@
  * as there is a known bug in array storage:
  * https://blog.ethereum.org/2019/06/25/solidity-storage-array-bugs/
  */
-pragma solidity >=0.5.10 <0.6.0;
+pragma solidity 0.5.12;
 pragma experimental ABIEncoderV2;
 
 import {RTokenStructs} from "./RTokenStructs.sol";
@@ -47,8 +47,8 @@ contract RTokenStorage is RTokenStructs, IERC20 {
     Hat[] internal hats;
     /// @dev Account mapping
     mapping(address => Account) public accounts;
-    /// @dev AccountStats mapping
+    /// @dev AccountStatsStored mapping
     mapping(address => AccountStatsStored) public accountStats;
-    /// @dev HatStats mapping
+    /// @dev HatStatsStored mapping
     mapping(uint256 => HatStatsStored) public hatStats;
 }

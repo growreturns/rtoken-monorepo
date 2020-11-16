@@ -1,4 +1,4 @@
-pragma solidity >=0.5.10 <0.6.0;
+pragma solidity 0.5.12;
 
 import {IAllocationStrategy} from "./IAllocationStrategy.sol";
 import {Ownable} from "@openzeppelin/contracts/ownership/Ownable.sol";
@@ -10,8 +10,10 @@ contract CompoundAllocationStrategy is IAllocationStrategy, Ownable {
     CErc20Interface private cToken;
     IERC20 private token;
 
-    constructor(CErc20Interface cToken_) public {
-        cToken = cToken_;
+    constructor(address cToken_) public {
+        require(cToken_ != address(0), "cToken_ is zero address");
+
+        cToken = CErc20Interface(cToken_);
         token = IERC20(cToken.underlying());
     }
 
