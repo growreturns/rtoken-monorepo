@@ -1,5 +1,10 @@
+/**
+ * Because the use of ABIEncoderV2 , the pragma should be locked above 0.5.10 ,
+ * as there is a known bug in array storage:
+ * https://blog.ethereum.org/2019/06/25/solidity-storage-array-bugs/
+ */
+pragma solidity 0.5.12;
 pragma experimental ABIEncoderV2;
-pragma solidity >=0.5.10 <0.6.0;
 
 import {Proxiable} from "./Proxiable.sol";
 import {Ownable} from "./Ownable.sol";
@@ -490,7 +495,7 @@ contract RToken is
     }
 
     /// @dev IRToken.setStakingPool implementation
-    function setStakingPool(address newPool) 
+    function setStakingPool(address newPool)
         external
         nonReentrant
         onlyOwner {
@@ -505,6 +510,7 @@ contract RToken is
 
     /// @dev IRToken.changeHatFor implementation
     function changeHatFor(address contractAddress, uint256 hatID) external onlyOwner {
+        require(contractAddress != address(0), "contractAddress is zero address");
         require(_isContract(contractAddress), "Admin can only change hat for contract address");
         changeHatInternal(contractAddress, hatID);
     }
