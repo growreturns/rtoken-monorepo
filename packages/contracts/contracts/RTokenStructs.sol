@@ -1,4 +1,4 @@
-pragma solidity >=0.5.10 <0.6.0;
+pragma solidity 0.5.12;
 
 /**
  * @notice RToken storage structures

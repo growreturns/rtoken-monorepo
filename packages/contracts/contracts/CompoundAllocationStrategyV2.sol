@@ -1,4 +1,4 @@
-pragma solidity >=0.5.10 <0.6.0;
+pragma solidity 0.5.12;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {CErc20Interface} from "../compound/contracts/CErc20Interface.sol";
@@ -17,9 +17,12 @@ contract CompoundAllocationStrategyV2 is CompoundAllocationStrategy {
 
     address public compReceiver;
 
-    constructor(CErc20Interface cToken_, address compReceiver_) CompoundAllocationStrategy(cToken_)
+    constructor(address cToken_, address compReceiver_) CompoundAllocationStrategy(cToken_)
       public {
-          cTokenContract = cToken_;
+          require(cToken_ != address(0), "cToken_ is zero address");
+          require(compReceiver_ != address(0), "compReceiver_ is zero address");
+
+          cTokenContract = CErc20Interface(cToken_);
           compReceiver = compReceiver_;
           emit CompReceiverChanged(address(0), compReceiver);
     }
@@ -30,6 +33,7 @@ contract CompoundAllocationStrategyV2 is CompoundAllocationStrategy {
     }
 
     function transferCompReceiverRights(address newReceiver) external auth {
+        require(newReceiver != address(0), "newReceiver is zero address");
 
         emit CompReceiverChanged(compReceiver, newReceiver);
         compReceiver = newReceiver;
