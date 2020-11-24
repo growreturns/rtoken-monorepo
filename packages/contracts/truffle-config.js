@@ -18,7 +18,7 @@
  *
  */
 
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const HDWalletProvider = require("truffle-hdwallet-provider-privkey");
 require("dotenv").config();
 // const infuraKey = "fj4jll3k.....";
 //
@@ -52,11 +52,8 @@ module.exports = {
 
         rinkeby: {
             provider: () => new HDWalletProvider(
-                process.env.RINKEBY_MNEMONIC,
-                process.env.RINKEBY_PROVIDER_URL,
-                0, //address_index
-                10, // num_addresses
-                true // shareNonce
+                [process.env.RINKEBY_PRIVKEY],
+                process.env.RINKEBY_PROVIDER_URL
             ),
             network_id: 4, // Rinkeby's id
             //gas: 7017622, //
@@ -67,11 +64,8 @@ module.exports = {
 
         kovan: {
             provider: () => new HDWalletProvider(
-                process.env.KOVAN_MNEMONIC,
-                process.env.KOVAN_PROVIDER_URL,
-                0, //address_index
-                10, // num_addresses
-                true // shareNonce
+                [process.env.KOVAN_PRIVKEY],
+                process.env.KOVAN_PROVIDER_URL
             ),
             network_id: 42, // Kovan's id
             //gas: 7017622, //
@@ -82,15 +76,12 @@ module.exports = {
 
         mainnet: {
             provider: () => new HDWalletProvider(
-                process.env.MAINNET_MNEMONIC,
-                process.env.MAINNET_PROVIDER_URL,
-                0, //address_index
-                10, // num_addresses
-                true // shareNonce
+                [process.env.MAINNET_PRIVKEY],
+                process.env.MAINNET_PROVIDER_URL
             ),
             network_id: 1, // mainnet's id
             gas: 8000000, // max gaslimit
-            gasPrice: +process.env.MAINNET_GAS_PRICE || 1000*1000*1000, // default 1 gwei
+            gasPrice: 112000000000,
             //confirmations: 2, // # of confs to wait between deployments. (default: 0)
             timeoutBlocks: 50, // # of blocks before a deployment times out  (minimum/default: 50)
             skipDryRun: false // Skip dry run before migrations? (default: false for public nets )

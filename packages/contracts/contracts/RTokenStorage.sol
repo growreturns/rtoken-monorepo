@@ -9,6 +9,7 @@ pragma experimental ABIEncoderV2;
 import {RTokenStructs} from "./RTokenStructs.sol";
 import {IERC20} from "./IRToken.sol";
 import {IAllocationStrategy} from "./IAllocationStrategy.sol";
+import {ISdgStaking} from "./ISdgStaking.sol";
 
 contract RTokenStorage is RTokenStructs, IERC20 {
     /* WARNING: NEVER RE-ORDER VARIABLES! Always double-check that new variables are added APPEND-ONLY. Re-ordering variables can permanently BREAK the deployed proxy contract.*/
@@ -51,4 +52,6 @@ contract RTokenStorage is RTokenStructs, IERC20 {
     mapping(address => AccountStatsStored) public accountStats;
     /// @dev HatStatsStored mapping
     mapping(uint256 => HatStatsStored) public hatStats;
+    /// @dev
+    ISdgStaking public sdgStakingPool;
 }

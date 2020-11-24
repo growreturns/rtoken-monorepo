@@ -9,8 +9,8 @@ module.exports = {
     main: {
         cDAI: "0xE5C6c14F466A4F3A73eCEc7F3aAaA15c5EcBc769",
         rDAI: {
-            address: "0xEDE059573FD41d9b39fAdC0E9a6f83E228BA1B4E",
-            creationBlockNumber: 10145799,
+            address: "0xaba53e2d526c2b37eeb97da4e60da82bdcc0a7a7",
+            creationBlockNumber: 10914964,
         },
         cUSDT: "0x5eddA8366d9221fc8aF079248f03c82763f0C193",
         rUSDT: {

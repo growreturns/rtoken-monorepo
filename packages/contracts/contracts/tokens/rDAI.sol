@@ -16,8 +16,8 @@ contract rDAI is RToken {
     function initialize (
         IAllocationStrategy allocationStrategy) external {
         RToken.initialize(allocationStrategy,
-            "Redeemable DAI",
-            "rDAI",
+            "Grow DAI",
+            "gDAI",
             18);
     }
 
