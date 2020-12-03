@@ -499,6 +499,7 @@ contract RToken is
         external
         nonReentrant
         onlyOwner {
+        require(newPool != address(0), "newPool is zero address");
         sdgStakingPool = ISdgStaking(newPool);
     }
 
